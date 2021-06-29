@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filter_tags %}
+
+{% block title %}Full Papers{% endblock %}
+
+{% block head %}
+<style>
+.mytitle {
+	color = #2b537f !important;
+}
+
+.mytitle:hover {
+	color: #073d78;
+}
+</style>
+{% endblock %}
+
+{% block mode %}class="light"{% endblock %}
+
+{% block body %}
+
+	<!-- desktop header -->
+	<header class="desktop-header-3 fixed-top">
+
+		<div class="container">
+
+			<nav class="navbar navbar-expand-lg navbar-dark">
+				<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Bolby" height="108" width="108" /></a> <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNavDropdown" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+				
+				<div class="nav-search">
+					
+					<form method="post" action="abstracts.html" class="search-form">
+						
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" required>
+							<div class="input-group-append">
+								<a href="#advanced-search" class="btn btn-outline-danger work-content" type="button">Advanced</a>
+								<button type="submit" class="btn btn-danger" type="button">Search</button>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+
+				<div id="advanced-search" class="white-popup zoom-anim-dialog mfp-hide">
+
+					<h5>Search Criteria</h5>
+
+					<hr>
+
+					<form method="post" action="abstracts.html" class="search-form">
+
+						<div class="form-group">
+							<label>Number of Pages:</label>
+							<input type="number" class="form-control" placeholder="Number of Pages" required="required">
+						</div>
+
+						<div class="form-group">
+							<label>Estimated Time: (mm)</label>
+							<input type="number" class="form-control" placeholder="Estimated Time" required="required">
+						</div>
+
+						<div class="form-group">
+							<label>Processing Mode</label>
+							<select class="form-control">
+								<option value="Now" selected>Now</option>
+								<option value="Batch">Batch</option>
+							</select>
+						</div>
+
+						<button type="submit" href="abstracts.html" class="btn btn-default">Search</button>
+
+					</form>
+
+				</div>
+
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav ml-auto scrollspy">
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'abstracts' %}">
+								<i class="fas fa-arrow-left"></i> Go Back
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+		</div>
+
+	</header>
+
+	<!-- main layout -->
+	<main class="content-3" style="margin-top: 50px;">		
+
+		<!-- section experience -->
+		<section id="experience">
+
+			<div class="container">
+
+				<!-- section title -->
+				<h2 class="section-title wow fadeInUp">Search Results</h2>
+
+				<div class="spacer" data-height="60"></div>
+
+				<div class="row">
+
+					<div class="col-md-12">
+
+						<!-- timeline wrapper -->
+						<div class="timeline edu bg-white rounded shadow-dark padding-30 overflow-hidden">
+
+							{% for paper in selected_papers %}
+
+							<!-- timeline item -->
+							<div class="timeline-container wow fadeInUp">
+								<div class="content">
+									{% with enable_star="text-warning" %}
+									<span class="time">
+										<span class="fa fa-star {% if paper.score > 0  %}{{ enable_star }}{% endif %}"></span>
+										<span class="fa fa-star {% if paper.score > 20 %}{{ enable_star }}{% endif %}"></span>
+										<span class="fa fa-star {% if paper.score > 40 %}{{ enable_star }}{% endif %}"></span>
+										<span class="fa fa-star {% if paper.score > 60 %}{{ enable_star }}{% endif %}"></span>
+										<span class="fa fa-star {% if paper.score > 80 %}{{ enable_star }}{% endif %}"></span>
+									</span>
+									{% endwith %}
+									
+									<!--<h3 class="title">Paper For Academic Research</h3>-->
+									<h3 class="title mytitle">
+										<a href="{{ paper.url }}" target="_blank" class="without-selection mytitle">{{ paper.title }}</a>
+									</h3>
+
+									<div class="c100 p{{ paper.score }} small">
+										<span style="color: #6c757d;">{{ paper.score }}%</span>
+										<div class="slice">
+											<div class="bar"></div>
+											<div class="fill"></div>
+										</div>
+									</div>
+
+									<div style="margin-left: 100px;">
+										<p style="text-align: justify; text-justify: inter-word; padding-right: 50px;">
+									<!--Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto. Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto. Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto. Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.-->
+											{{ paper.abstract }}
+										</p>
+									</div>
+									
+									<hr />
+
+									<div class="row">
+										<div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 5px;">
+											<a href="{{ paper.pdf_url }}" target="_blank">
+												<i class="far fa-file-pdf"></i> View PDF
+											</a>
+										</div>
+										<div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 5px;">
+											
+											<a href="{{paper.pdf_url}}" target="_blank" download="{{paper.pdf_url}}">
+												<i class="fas fa-download"></i> Download
+											</a>
+
+										</div>
+										<div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 5px;">
+											<a href="details.html">
+												<i class="fas fa-info-circle"></i> View Details
+											</a>
+										</div>
+									</div>
+
+									<div class="spacer" data-height="50"></div>
+
+								</div>
+							</div>
+							{% endfor %}
+
+
+							<!-- main line -->
+							<span class="line"></span>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="center">
+					
+					<div class="pagination">
+
+						<a href="#">&laquo;</a>
+						<a href="#" class="active">1</a>
+						<a href="#">2</a>
+						<a href="#">3</a>
+						<a href="#">4</a>
+						<a href="#">5</a>
+						<a href="#">6</a>
+						<a href="#">&raquo;</a>
+
+					</div>
+
+				</div>				
+
+			</div>
+
+		</section>
+
+		<div class="spacer" data-height="96"></div>
+
+		<footer class="footer">
+			<div class="container">
+				<span class="copyright">© All Rights Reserved.</span>
+			</div>
+		</footer>
+
+	</main>
+
+{% endblock %}

@@ -6,439 +6,376 @@
 {% block mode %}class="dark"{% endblock %}
 
 {% block body %}
-<!-- desktop header -->
-<header class="desktop-header-3 fixed-top">
-
-<div class="container">
-
-	<nav class="navbar navbar-expand-lg navbar-dark">
-		<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Bolby" height="108" width="108" /></a> <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNavDropdown" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav ml-auto scrollspy">
-				<li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-				<li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
-				<li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
-				<li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>					
-			</ul>
-		</div>
-	</nav>
-
-</div>
-
-</header>
-
-<!-- main layout -->
-<main class="content-3">
-
-<!-- section home -->
-<section id="home" class="home d-flex align-items-center">
-	<div class="container">
-
-		<!-- intro -->
-		<div class="intro" style="max-width: 650px;">
-			<!-- avatar image -->
-			<img src="{% static 'images/logo.png' %}" alt="Bolby" class="mb-4" height="200" width="250" />
-
-			<!-- info -->
-			<form method="post" action="{% url 'abstracts' %}" class="search-form">
-				{% csrf_token %}
-				<!--{{ form }}-->
-
-				<div class="form-group">
-					<input type="text" class="form-control" id="InputSubject" name="InputSubject" placeholder="Search" max_length="100" required>
+	<!-- desktop header -->
+	<header class="desktop-header-3 fixed-top">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-dark">
+				<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Bolby" height="108" width="108" /></a> <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNavDropdown" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav ml-auto scrollspy">
+						<li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+						<li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
+						<li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+						<li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
+						<li class="nav-item"><a href="#contact" class="nav-link">Contact Us</a></li>	
+					</ul>
 				</div>
-
-				<a href="#advanced-search" class="work-content">Advanced Search</a>
-				
-				<div class="mt-4">
-					<button type="submit" href="{% url 'abstracts' %}" class="btn btn-default">Search</button>
-				</div>
-
-			</form>
-
-			<div id="advanced-search" class="white-popup zoom-anim-dialog mfp-hide">
-
-				<h5>Search Criteria</h5>
-				
-				<hr>
-
-				<form method="post" action="{% url 'abstracts' %}" class="search-form">
-					{% csrf_token %}
-
-					<div class="form-group">
-						<label>Number of Pages:</label>
-						<input type="number" class="form-control" placeholder="Number of Pages" required="required">
-					</div>
-
-					<div class="form-group">
-						<label>Estimated Time: (mm)</label>
-						<input type="number" class="form-control" placeholder="Estimated Time" required="required">
-					</div>
-
-					<div class="form-group">
-						<label>Processing Mode</label>
-						<select class="form-control">
-							<option value="Now" selected>Now</option>
-							<option value="Batch">Batch</option>
-						</select>
-					</div>
-
-					<button type="submit" href="{% url 'abstracts' %}" class="btn btn-default">Search</button>
-
-				</form>
-
-			</div>
-
+			</nav>
 		</div>
+	</header>
 
-		<!-- scroll down mouse wheel -->
-		<div class="scroll-down">
-			<a href="#about" class="mouse-wrapper">
-				<span>Learn More</span>
-				<span class="mouse">
-					<span class="wheel"></span>
-				</span>
-			</a>
-		</div>
-
-		<!-- parallax layers -->
-		<div class="parallax" data-relative-input="true">
-
-			<svg width="27" height="29" data-depth="0.3" class="layer p1" xmlns="http://www.w3.org/2000/svg"><path d="M21.15625.60099c4.37954 3.67487 6.46544 9.40612 5.47254 15.03526-.9929 5.62915-4.91339 10.30141-10.2846 12.25672-5.37122 1.9553-11.3776.89631-15.75715-2.77856l2.05692-2.45134c3.50315 2.93948 8.3087 3.78663 12.60572 2.22284 4.297-1.5638 7.43381-5.30209 8.22768-9.80537.79387-4.50328-.8749-9.08872-4.37803-12.02821L21.15625.60099z" fill="#FFD15C" fill-rule="evenodd"/></svg>
-
-			<svg width="26" height="26" data-depth="0.2" class="layer p2" xmlns="http://www.w3.org/2000/svg"><path d="M13 3.3541L2.42705 24.5h21.1459L13 3.3541z" stroke="#FF4C60" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
-
-			<svg width="30" height="25" data-depth="0.3" class="layer p3" xmlns="http://www.w3.org/2000/svg"><path d="M.1436 8.9282C3.00213 3.97706 8.2841.92763 14.00013.92796c5.71605.00032 10.9981 3.04992 13.85641 8 2.8583 4.95007 2.8584 11.0491-.00014 16.00024l-2.77128-1.6c2.28651-3.96036 2.28631-8.84002.00011-12.8002-2.2862-3.96017-6.5124-6.40017-11.08513-6.4-4.57271.00018-8.79872 2.43984-11.08524 6.4002l-2.77128-1.6z" fill="#44D7B6" fill-rule="evenodd"/></svg>
-
-			<svg width="15" height="23" data-depth="0.6" class="layer p4" xmlns="http://www.w3.org/2000/svg"><rect transform="rotate(30 9.86603 10.13397)" x="7" width="3" height="25" rx="1.5" fill="#FFD15C" fill-rule="evenodd"/></svg>
-
-			<svg width="15" height="23" data-depth="0.2" class="layer p5" xmlns="http://www.w3.org/2000/svg"><rect transform="rotate(30 9.86603 10.13397)" x="7" width="3" height="25" rx="1.5" fill="#6C6CE5" fill-rule="evenodd"/></svg>
-
-			<svg width="49" height="17" data-depth="0.5" class="layer p6" xmlns="http://www.w3.org/2000/svg"><g fill="#FF4C60" fill-rule="evenodd"><path d="M.5 16.5c0-5.71709 2.3825-10.99895 6.25-13.8567 3.8675-2.85774 8.6325-2.85774 12.5 0C23.1175 5.50106 25.5 10.78292 25.5 16.5H23c0-4.57303-1.90625-8.79884-5-11.08535-3.09375-2.28652-6.90625-2.28652-10 0C4.90625 7.70116 3 11.92697 3 16.5H.5z"/><path d="M23.5 16.5c0-5.71709 2.3825-10.99895 6.25-13.8567 3.8675-2.85774 8.6325-2.85774 12.5 0C46.1175 5.50106 48.5 10.78292 48.5 16.5H46c0-4.57303-1.90625-8.79884-5-11.08535-3.09375-2.28652-6.90625-2.28652-10 0-3.09375 2.28651-5 6.51232-5 11.08535h-2.5z"/></g></svg>
-
-			<svg width="26" height="26" data-depth="0.4" class="layer p7" xmlns="http://www.w3.org/2000/svg"><path d="M13 22.6459L2.42705 1.5h21.1459L13 22.6459z" stroke="#FFD15C" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
-
-			<svg width="19" height="21" data-depth="0.3" class="layer p8" xmlns="http://www.w3.org/2000/svg"><rect transform="rotate(-40 6.25252 10.12626)" x="7" width="3" height="25" rx="1.5" fill="#6C6CE5" fill-rule="evenodd"/></svg>
-
-			<svg width="30" height="25" data-depth="0.3" data-depth-y="-1.30" class="layer p9" xmlns="http://www.w3.org/2000/svg"><path d="M29.8564 16.0718c-2.85854 4.95114-8.1405 8.00057-13.85654 8.00024-5.71605-.00032-10.9981-3.04992-13.85641-8-2.8583-4.95007-2.8584-11.0491.00014-16.00024l2.77128 1.6c-2.28651 3.96036-2.28631 8.84002-.00011 12.8002 2.2862 3.96017 6.5124 6.40017 11.08513 6.4 4.57271-.00018 8.79872-2.43984 11.08524-6.4002l2.77128 1.6z" fill="#6C6CE5" fill-rule="evenodd"/></svg>
-
-			<svg width="47" height="29" data-depth="0.2" class="layer p10" xmlns="http://www.w3.org/2000/svg"><g fill="#44D7B6" fill-rule="evenodd"><path d="M46.78878 17.19094c-1.95535 5.3723-6.00068 9.52077-10.61234 10.8834-4.61167 1.36265-9.0893-.26708-11.74616-4.27524-2.65686-4.00817-3.08917-9.78636-1.13381-15.15866l2.34923.85505c-1.56407 4.29724-1.2181 8.92018.90705 12.12693 2.12514 3.20674 5.70772 4.5107 9.39692 3.4202 3.68921-1.0905 6.92581-4.40949 8.48988-8.70673l2.34923.85505z"/><path d="M25.17585 9.32448c-1.95535 5.3723-6.00068 9.52077-10.61234 10.8834-4.61167 1.36264-9.0893-.26708-11.74616-4.27525C.16049 11.92447-.27182 6.14628 1.68354.77398l2.34923.85505c-1.56407 4.29724-1.2181 8.92018.90705 12.12692 2.12514 3.20675 5.70772 4.5107 9.39692 3.4202 3.68921-1.0905 6.92581-4.40948 8.48988-8.70672l2.34923.85505z"/></g></svg>
-
-			<svg width="33" height="20" data-depth="0.5" class="layer p11" xmlns="http://www.w3.org/2000/svg"><path d="M32.36774.34317c.99276 5.63023-1.09332 11.3614-5.47227 15.03536-4.37895 3.67396-10.3855 4.73307-15.75693 2.77837C5.76711 16.2022 1.84665 11.53014.8539 5.8999l3.15139-.55567c.7941 4.50356 3.93083 8.24147 8.22772 9.8056 4.29688 1.56413 9.10275.71673 12.60554-2.2227C28.34133 9.98771 30.01045 5.4024 29.21635.89884l3.15139-.55567z" fill="#FFD15C" fill-rule="evenodd"/></svg>
-
-		</div>
-	</div>
-
-</section>
-
-<!-- section about -->
-<section id="about">
-
-	<div class="container">
-
-		<!-- section title -->
-		<h2 class="section-title wow fadeInUp">About Us</h2>
-
-		<div class="spacer" data-height="60"></div>
-
-		<div class="row">
-
-			<div class="col-md-3">
-				<div class="text-center text-md-left">
+	<!-- main layout -->
+	<main class="content-3">
+		<!-- section home -->
+		<section id="home" class="home d-flex align-items-center">
+			<div class="container">
+				<!-- intro -->
+				<div class="intro" style="max-width: 650px;">
 					<!-- avatar image -->
-					<img src="{% static 'images/logo.png' %}" alt="Bolby" height="200" width="200" />
-				</div>
-				<div class="spacer d-md-none d-lg-none" data-height="30"></div>
-			</div>
-
-			<div class="col-md-9 triangle-left-md triangle-top-sm">
-				<div class="rounded bg-dark shadow-light padding-30">
-					<div class="row">
-						<div class="col-md-6">
-							<!-- about text -->
-							<p>ODRPL is a free, AI-powered research tool to find the most relevant research papers .</p>
-							<div class="mt-3">
-								<a href="#" class="btn btn-default">View Documentation</a>
-							</div>
-							<div class="spacer d-md-none d-lg-none" data-height="30"></div>
+					<img src="{% static 'images/logo.png' %}" alt="Bolby" class="mb-4" height="200" width="250" />
+					
+					<!-- search -->
+					<form id="main-form" method="post" action="{% url 'abstracts' %}" class="search-form">
+					{% csrf_token %}
+						<div class="form-group">
+							<input type="text" class="form-control" id="InputSubject" name="InputSubject" placeholder="Search" max_length="100" required>
 						</div>
-						<div class="col-md-6">
-							<!-- skill item -->
-							<div class="skill-item">
-								<div class="skill-info clearfix">
-									<h4 class="float-left mb-3 mt-0">Artificial Intelligence</h4>
-									<span class="float-right">85%</span>
+
+						<a href="#advanced-search" class="work-content">Advanced Search</a>
+						
+						<div class="mt-4">
+							<button type="submit" class="btn btn-default">Search</button>
+						</div>
+					</form>
+
+					<!-- advanced search -->
+					<div id="advanced-search" class="white-popup zoom-anim-dialog mfp-hide">
+						<h5>Search Criteria</h5><hr/>
+
+						<form method="post" action="" class="search-form">
+						{% csrf_token %}
+							<div class="form-group">
+								<label>Number of Pages:</label>
+								<input type="number" class="form-control" placeholder="Number of Pages" required="required">
+							</div>
+
+							<div class="form-group">
+								<label>Estimated Time: (mm)</label>
+								<input type="number" class="form-control" placeholder="Estimated Time" required="required">
+							</div>
+
+							<div class="form-group">
+								<label>Processing Mode</label>
+								<select class="form-control">
+									<option value="Now" selected>Now</option>
+									<option value="Batch">Batch</option>
+								</select>
+							</div>
+
+							<button type="submit" class="btn btn-default">Search</button>
+						</form>
+					</div>
+				</div>
+
+				<!-- scroll down mouse wheel -->
+				<div class="scroll-down">
+					<a href="#about" class="mouse-wrapper">
+						<span>Learn More</span>
+						<span class="mouse">
+							<span class="wheel"></span>
+						</span>
+					</a>
+				</div>
+
+				<!-- parallax layers -->
+				<div class="parallax" data-relative-input="true">
+					<svg width="27" height="29" data-depth="0.3" class="layer p1" xmlns="http://www.w3.org/2000/svg"><path d="M21.15625.60099c4.37954 3.67487 6.46544 9.40612 5.47254 15.03526-.9929 5.62915-4.91339 10.30141-10.2846 12.25672-5.37122 1.9553-11.3776.89631-15.75715-2.77856l2.05692-2.45134c3.50315 2.93948 8.3087 3.78663 12.60572 2.22284 4.297-1.5638 7.43381-5.30209 8.22768-9.80537.79387-4.50328-.8749-9.08872-4.37803-12.02821L21.15625.60099z" fill="#FFD15C" fill-rule="evenodd"/></svg>
+					<svg width="26" height="26" data-depth="0.2" class="layer p2" xmlns="http://www.w3.org/2000/svg"><path d="M13 3.3541L2.42705 24.5h21.1459L13 3.3541z" stroke="#FF4C60" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
+					<svg width="30" height="25" data-depth="0.3" class="layer p3" xmlns="http://www.w3.org/2000/svg"><path d="M.1436 8.9282C3.00213 3.97706 8.2841.92763 14.00013.92796c5.71605.00032 10.9981 3.04992 13.85641 8 2.8583 4.95007 2.8584 11.0491-.00014 16.00024l-2.77128-1.6c2.28651-3.96036 2.28631-8.84002.00011-12.8002-2.2862-3.96017-6.5124-6.40017-11.08513-6.4-4.57271.00018-8.79872 2.43984-11.08524 6.4002l-2.77128-1.6z" fill="#44D7B6" fill-rule="evenodd"/></svg>
+					<svg width="15" height="23" data-depth="0.6" class="layer p4" xmlns="http://www.w3.org/2000/svg"><rect transform="rotate(30 9.86603 10.13397)" x="7" width="3" height="25" rx="1.5" fill="#FFD15C" fill-rule="evenodd"/></svg>
+					<svg width="15" height="23" data-depth="0.2" class="layer p5" xmlns="http://www.w3.org/2000/svg"><rect transform="rotate(30 9.86603 10.13397)" x="7" width="3" height="25" rx="1.5" fill="#6C6CE5" fill-rule="evenodd"/></svg>
+					<svg width="49" height="17" data-depth="0.5" class="layer p6" xmlns="http://www.w3.org/2000/svg"><g fill="#FF4C60" fill-rule="evenodd"><path d="M.5 16.5c0-5.71709 2.3825-10.99895 6.25-13.8567 3.8675-2.85774 8.6325-2.85774 12.5 0C23.1175 5.50106 25.5 10.78292 25.5 16.5H23c0-4.57303-1.90625-8.79884-5-11.08535-3.09375-2.28652-6.90625-2.28652-10 0C4.90625 7.70116 3 11.92697 3 16.5H.5z"/><path d="M23.5 16.5c0-5.71709 2.3825-10.99895 6.25-13.8567 3.8675-2.85774 8.6325-2.85774 12.5 0C46.1175 5.50106 48.5 10.78292 48.5 16.5H46c0-4.57303-1.90625-8.79884-5-11.08535-3.09375-2.28652-6.90625-2.28652-10 0-3.09375 2.28651-5 6.51232-5 11.08535h-2.5z"/></g></svg>
+					<svg width="26" height="26" data-depth="0.4" class="layer p7" xmlns="http://www.w3.org/2000/svg"><path d="M13 22.6459L2.42705 1.5h21.1459L13 22.6459z" stroke="#FFD15C" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
+					<svg width="19" height="21" data-depth="0.3" class="layer p8" xmlns="http://www.w3.org/2000/svg"><rect transform="rotate(-40 6.25252 10.12626)" x="7" width="3" height="25" rx="1.5" fill="#6C6CE5" fill-rule="evenodd"/></svg>
+					<svg width="30" height="25" data-depth="0.3" data-depth-y="-1.30" class="layer p9" xmlns="http://www.w3.org/2000/svg"><path d="M29.8564 16.0718c-2.85854 4.95114-8.1405 8.00057-13.85654 8.00024-5.71605-.00032-10.9981-3.04992-13.85641-8-2.8583-4.95007-2.8584-11.0491.00014-16.00024l2.77128 1.6c-2.28651 3.96036-2.28631 8.84002-.00011 12.8002 2.2862 3.96017 6.5124 6.40017 11.08513 6.4 4.57271-.00018 8.79872-2.43984 11.08524-6.4002l2.77128 1.6z" fill="#6C6CE5" fill-rule="evenodd"/></svg>
+					<svg width="47" height="29" data-depth="0.2" class="layer p10" xmlns="http://www.w3.org/2000/svg"><g fill="#44D7B6" fill-rule="evenodd"><path d="M46.78878 17.19094c-1.95535 5.3723-6.00068 9.52077-10.61234 10.8834-4.61167 1.36265-9.0893-.26708-11.74616-4.27524-2.65686-4.00817-3.08917-9.78636-1.13381-15.15866l2.34923.85505c-1.56407 4.29724-1.2181 8.92018.90705 12.12693 2.12514 3.20674 5.70772 4.5107 9.39692 3.4202 3.68921-1.0905 6.92581-4.40949 8.48988-8.70673l2.34923.85505z"/><path d="M25.17585 9.32448c-1.95535 5.3723-6.00068 9.52077-10.61234 10.8834-4.61167 1.36264-9.0893-.26708-11.74616-4.27525C.16049 11.92447-.27182 6.14628 1.68354.77398l2.34923.85505c-1.56407 4.29724-1.2181 8.92018.90705 12.12692 2.12514 3.20675 5.70772 4.5107 9.39692 3.4202 3.68921-1.0905 6.92581-4.40948 8.48988-8.70672l2.34923.85505z"/></g></svg>
+					<svg width="33" height="20" data-depth="0.5" class="layer p11" xmlns="http://www.w3.org/2000/svg"><path d="M32.36774.34317c.99276 5.63023-1.09332 11.3614-5.47227 15.03536-4.37895 3.67396-10.3855 4.73307-15.75693 2.77837C5.76711 16.2022 1.84665 11.53014.8539 5.8999l3.15139-.55567c.7941 4.50356 3.93083 8.24147 8.22772 9.8056 4.29688 1.56413 9.10275.71673 12.60554-2.2227C28.34133 9.98771 30.01045 5.4024 29.21635.89884l3.15139-.55567z" fill="#FFD15C" fill-rule="evenodd"/></svg>
+				</div>
+			</div>
+		</section>
+
+		<!-- section about -->
+		<section id="about">
+			<div class="container">
+				<!-- section title -->
+				<h2 class="section-title wow fadeInUp">About Us</h2>
+				<div class="spacer" data-height="60"></div>
+
+				<div class="row">
+					<div class="col-md-3">
+						<div class="text-center text-md-left">
+							<!-- avatar image -->
+							<img src="{% static 'images/logo.png' %}" alt="Bolby" height="200" width="200" />
+						</div>
+						<div class="spacer d-md-none d-lg-none" data-height="30"></div>
+					</div>
+
+					<div class="col-md-9 triangle-left-md triangle-top-sm">
+						<div class="rounded bg-dark shadow-light padding-30">
+							<div class="row">
+								<div class="col-md-6">
+									<!-- about text -->
+									<p>ODRPL is a free, AI-powered research tool to find the most relevant research papers.</p>
+									<div class="mt-3">
+										<a href="#" class="btn btn-default">View Documentation</a>
+									</div>
+									<div class="spacer d-md-none d-lg-none" data-height="30"></div>
 								</div>
-								<div class="progress">
-									<div class="progress-bar data-background" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" data-color="#FFD15C">
+								<div class="col-md-6">
+									<!-- skill item -->
+									<div class="skill-item">
+										<div class="skill-info clearfix">
+											<h4 class="float-left mb-3 mt-0">Artificial Intelligence</h4>
+											<span class="float-right">85%</span>
+										</div>
+										<div class="progress">
+											<div class="progress-bar data-background" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" data-color="#FFD15C">
+											</div>
+										</div>
+										<div class="spacer" data-height="20"></div>
+									</div>
+
+									<!-- skill item -->
+									<div class="skill-item">
+										<div class="skill-info clearfix">
+											<h4 class="float-left mb-3 mt-0">Python Model Training</h4>
+											<span class="float-right">95%</span>
+										</div>
+										<div class="progress">
+											<div class="progress-bar data-background" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95" data-color="#FF4C60">
+											</div>
+										</div>
+										<div class="spacer" data-height="20"></div>
+									</div>
+
+									<!-- skill item -->
+									<div class="skill-item">
+										<div class="skill-info clearfix">
+											<h4 class="float-left mb-3 mt-0">Javascript UI/UX</h4>
+											<span class="float-right">70%</span>
+										</div>
+										<div class="progress">
+											<div class="progress-bar data-background" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" data-color="#6C6CE5">
+											</div>
+										</div>
 									</div>
 								</div>
-								<div class="spacer" data-height="20"></div>
 							</div>
+						</div>
+					</div>
+				</div>
+				<!-- row end -->
+			</div>
+		</section>
 
-							<!-- skill item -->
-							<div class="skill-item">
-								<div class="skill-info clearfix">
-									<h4 class="float-left mb-3 mt-0">Python Model Training</h4>
-									<span class="float-right">95%</span>
-								</div>
-								<div class="progress">
-									<div class="progress-bar data-background" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95" data-color="#FF4C60">
+		<!-- section services -->
+		<section id="services">
+			<div class="container">
+				<!-- section title -->
+				<h2 class="section-title wow fadeInUp">Services</h2>
+				<div class="spacer" data-height="60"></div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<!-- service box -->
+						<div class="service-box rounded data-background padding-30 text-center text-light shadow-blue" data-color="#6C6CE5">
+							<p style="font-size: 50px;"><i class="fas fa-search"></i></p>
+							<h3 class="mb-3 mt-0">On Demand Search</h3>
+							<p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.</p>
+						</div>
+						<div class="spacer d-md-none d-lg-none" data-height="30"></div>
+					</div>
+
+					<div class="col-md-4">
+						<!-- service box -->
+						<div class="service-box rounded data-background padding-30 text-center shadow-yellow" data-color="#F9D74C">
+							<p style="font-size: 50px;"><i class="far fa-copy"></i></p>
+							<h3 class="mb-3 mt-0">Relevant Papers</h3>
+							<p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.</p>
+						</div>
+						<div class="spacer d-md-none d-lg-none" data-height="30"></div>
+					</div>
+
+					<div class="col-md-4">
+						<!-- service box -->
+						<div class="service-box rounded data-background padding-30 text-center text-light shadow-pink" data-color="#F97B8B">
+							<p style="font-size: 50px;"><i class="fas fa-tachometer-alt"></i></p>
+							<h3 class="mb-3 mt-0">Quick Results</h3>
+							<p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="mt-5 text-center">
+					<p class="mb-0">Looking for a research paper? <a href="#home">Click here</a></p>
+				</div>
+			</div>
+		</section>
+
+		<!-- section faq -->
+		<section id="faq">
+			<div class="container">
+				<!-- section title -->
+				<h2 class="section-title wow fadeInUp">FAQs</h2>
+				<div class="spacer" data-height="60"></div>
+
+				<div class="accordion" id="accordionExample">
+					<div class="card bg-dark shadow-light rounded triangle-top position-relative">
+						<div class="card-header" id="headingOne">
+							<p class="mb-0 ml-4" style="font-size: 20px;">
+								<a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">What is on demand research paper?</a>
+							</p>
+						</div>
+
+						<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div class="card-body" style="background-color: #5E5C7F;">
+								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+							</div>
+						</div>
+					</div>
+					<div class="card bg-dark shadow-light rounded triangle-top position-relative">
+						<div class="card-header" id="headingTwo">
+							<p class="mb-0 ml-4" style="font-size: 20px;">
+								<a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">How does on demand research paper work?</a>
+							</p>
+						</div>
+						<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+							<div class="card-body" style="background-color: #5E5C7F;">
+								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+							</div>
+						</div>
+					</div>
+					<div class="card bg-dark shadow-light rounded triangle-top position-relative">
+						<div class="card-header" id="headingThree">
+							<p class="mb-0 ml-4" style="font-size: 20px;">
+								<a href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">How to find relevand research papers?</a>
+							</p>
+						</div>
+						<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+							<div class="card-body" style="background-color: #5E5C7F;">
+								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- section testimonials -->
+		<section id="testimonials">
+			<div class="container">
+				<!-- section title -->
+				<h2 class="section-title wow fadeInUp">Clients &amp Reviews</h2>
+				<div class="spacer" data-height="60"></div>
+
+				<!-- testimonials wrapper -->
+				<div class="testimonials-wrapper">
+					<!-- testimonial item -->
+					<div class="testimonial-item text-center mx-auto">
+						<div class="thumb mb-3 mx-auto">
+							<p style="font-size: 70px"><i class="fas fa-user-circle"></i></p>						
+						</div>
+						<h4 class="mt-3 mb-0">John Doe</h4>
+						<span class="subtitle">Product designer at Dribbble</span>
+						<div class="bg-dark padding-30 shadow-light rounded triangle-top position-relative mt-4">
+							<p class="mb-0">I enjoy working with the theme and learn so much. You guys make the process fun and interesting. Good luck! 👍</p>
+						</div>
+					</div>
+
+					<!-- testimonial item -->
+					<div class="testimonial-item text-center mx-auto">
+						<div class="thumb mb-3 mx-auto">
+							<p style="font-size: 70px"><i class="fas fa-user-circle"></i></p>						
+						</div>
+						<h4 class="mt-3 mb-0">John Doe</h4>
+						<span class="subtitle">Product designer at Dribbble</span>
+						<div class="bg-dark padding-30 shadow-light rounded triangle-top position-relative mt-4">
+							<p class="mb-0">I enjoy working with the theme and learn so much. You guys make the process fun and interesting. Good luck! 🔥</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- section contact -->
+		<section id="contact">
+			<div class="container">
+				<!-- section title -->
+				<h2 class="section-title wow fadeInUp">Contact Us</h2>
+				<div class="spacer" data-height="60"></div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<!-- contact info -->
+						<div class="contact-info">
+							<h3 class="wow fadeInUp">Let our team assist you!</h3>
+							<p class="wow fadeInUp">Don't like forms? Send us an <a href="mailto:name@example.com">email</a>. 👋</p>
+						</div>
+					</div>
+
+					<div class="col-md-8">
+						<!-- Contact Form -->
+						<form id="contact-form" class="contact-form mt-6" method="post" action="#">
+							<div class="messages"></div>
+
+							<div class="row">
+								<div class="column col-md-6">
+									<!-- Name input -->
+									<div class="form-group">
+										<input type="text" class="form-control" name="InputName" id="InputName" placeholder="Your name" required="required" data-error="Name is required.">
+										<div class="help-block with-errors"></div>
 									</div>
 								</div>
-								<div class="spacer" data-height="20"></div>
-							</div>
 
-							<!-- skill item -->
-							<div class="skill-item">
-								<div class="skill-info clearfix">
-									<h4 class="float-left mb-3 mt-0">Javascript UI/UX</h4>
-									<span class="float-right">70%</span>
+								<div class="column col-md-6">
+									<!-- Email input -->
+									<div class="form-group">
+										<input type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Email address" required="required" data-error="Email is required.">
+										<div class="help-block with-errors"></div>
+									</div>
 								</div>
-								<div class="progress">
-									<div class="progress-bar data-background" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" data-color="#6C6CE5">
+
+								<div class="column col-md-12">
+									<!-- Email input -->
+									<div class="form-group">
+										<input type="text" class="form-control" id="InputSubject" name="InputSubject" placeholder="Subject" required="required" data-error="Subject is required.">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+
+								<div class="column col-md-12">
+									<!-- Message textarea -->
+									<div class="form-group">
+										<textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" placeholder="Message" required="required" data-error="Message is required."></textarea>
+										<div class="help-block with-errors"></div>
 									</div>
 								</div>
 							</div>
-						</div>
+
+							<button type="submit" name="submit" id="submit" value="Submit" class="btn btn-default">Send Message</button><!-- Send Button -->
+						</form>
+						<!-- Contact Form end -->
 					</div>
 				</div>
 			</div>
+		</section>
 
-		</div>
-		<!-- row end -->
+		<div class="spacer" data-height="96"></div>
 
-	</div>
-
-</section>
-
-<!-- section services -->
-<section id="services">
-
-	<div class="container">
-
-		<!-- section title -->
-		<h2 class="section-title wow fadeInUp">Services</h2>
-
-		<div class="spacer" data-height="60"></div>
-
-		<div class="row">
-
-			<div class="col-md-4">
-				<!-- service box -->
-				<div class="service-box rounded data-background padding-30 text-center text-light shadow-blue" data-color="#6C6CE5">
-					<p style="font-size: 50px;"><i class="fas fa-search"></i></p>
-					<h3 class="mb-3 mt-0">On Demand Search</h3>
-					<p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.</p>
-				</div>
-				<div class="spacer d-md-none d-lg-none" data-height="30"></div>
+		<footer class="footer">
+			<div class="container">
+				<span class="copyright">© All Rights Reserved.</span>
 			</div>
-
-			<div class="col-md-4">
-				<!-- service box -->
-				<div class="service-box rounded data-background padding-30 text-center shadow-yellow" data-color="#F9D74C">
-					<p style="font-size: 50px;"><i class="far fa-copy"></i></p>
-					<h3 class="mb-3 mt-0">Relevant Papers</h3>
-					<p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.</p>
-				</div>
-				<div class="spacer d-md-none d-lg-none" data-height="30"></div>
-			</div>
-
-			<div class="col-md-4">
-				<!-- service box -->
-				<div class="service-box rounded data-background padding-30 text-center text-light shadow-pink" data-color="#F97B8B">
-					<p style="font-size: 50px;"><i class="fas fa-tachometer-alt"></i></p>
-					<h3 class="mb-3 mt-0">Quick Results</h3>
-					<p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.</p>
-				</div>
-			</div>
-
-		</div>
-
-		<div class="mt-5 text-center">
-			<p class="mb-0">Looking for a research paper? <a href="#home">Click here</a></p>
-		</div>
-
-	</div>
-
-</section>
-
-<!-- section faq -->
-<section id="faq">
-	
-	<div class="container">
-
-		<!-- section title -->
-		<h2 class="section-title wow fadeInUp">FAQs</h2>
-
-		<div class="spacer" data-height="60"></div>
-
-		<div class="accordion" id="accordionExample">
-			<div class="card bg-dark shadow-light rounded triangle-top position-relative">
-				<div class="card-header" id="headingOne">
-					<p class="mb-0 ml-4" style="font-size: 20px;">
-						<a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">What is on demand research paper?</a>
-					</p>
-				</div>
-
-				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-					<div class="card-body" style="background-color: #5E5C7F;">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-					</div>
-				</div>
-			</div>
-			<div class="card bg-dark shadow-light rounded triangle-top position-relative">
-				<div class="card-header" id="headingTwo">
-					<p class="mb-0 ml-4" style="font-size: 20px;">
-						<a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">How does on demand research paper work?</a>
-					</p>
-				</div>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-					<div class="card-body" style="background-color: #5E5C7F;">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-					</div>
-				</div>
-			</div>
-			<div class="card bg-dark shadow-light rounded triangle-top position-relative">
-				<div class="card-header" id="headingThree">
-					<p class="mb-0 ml-4" style="font-size: 20px;">
-						<a href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">How to find relevand research papers?</a>
-					</p>
-				</div>
-				<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-					<div class="card-body" style="background-color: #5E5C7F;">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	</div>
-
-</section>
-
-<!-- section testimonials -->
-<section id="testimonials">
-
-	<div class="container">
-
-		<!-- section title -->
-		<h2 class="section-title wow fadeInUp">Clients & Reviews</h2>
-
-		<div class="spacer" data-height="60"></div>
-
-		<!-- testimonials wrapper -->
-		<div class="testimonials-wrapper">
-
-			<!-- testimonial item -->
-			<div class="testimonial-item text-center mx-auto">
-				<div class="thumb mb-3 mx-auto">
-					<p style="font-size: 70px"><i class="fas fa-user-circle"></i></p>						
-				</div>
-				<h4 class="mt-3 mb-0">John Doe</h4>
-				<span class="subtitle">Product designer at Dribbble</span>
-				<div class="bg-dark padding-30 shadow-light rounded triangle-top position-relative mt-4">
-					<p class="mb-0">I enjoy working with the theme and learn so much. You guys make the process fun and interesting. Good luck! 👍</p>
-				</div>
-			</div>
-
-			<!-- testimonial item -->
-			<div class="testimonial-item text-center mx-auto">
-				<div class="thumb mb-3 mx-auto">
-					<p style="font-size: 70px"><i class="fas fa-user-circle"></i></p>						
-				</div>
-				<h4 class="mt-3 mb-0">John Doe</h4>
-				<span class="subtitle">Product designer at Dribbble</span>
-				<div class="bg-dark padding-30 shadow-light rounded triangle-top position-relative mt-4">
-					<p class="mb-0">I enjoy working with the theme and learn so much. You guys make the process fun and interesting. Good luck! 🔥</p>
-				</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</section>
-
-<!-- section contact -->
-<section id="contact">
-
-	<div class="container">
-
-		<!-- section title -->
-		<h2 class="section-title wow fadeInUp">Contact Us</h2>
-
-		<div class="spacer" data-height="60"></div>
-
-		<div class="row">
-
-			<div class="col-md-4">
-				<!-- contact info -->
-				<div class="contact-info">
-					<h3 class="wow fadeInUp">Let our team assist you!</h3>
-					<p class="wow fadeInUp">Don't like forms? Send us an <a href="mailto:name@example.com">email</a>. 👋</p>
-				</div>
-			</div>
-
-			<div class="col-md-8">
-				<!-- Contact Form -->
-				<form id="contact-form" class="contact-form mt-6" method="post" action="">
-
-					<div class="messages"></div>
-
-					<div class="row">
-						<div class="column col-md-6">
-							<!-- Name input -->
-							<div class="form-group">
-								<input type="text" class="form-control" name="InputName" id="InputName" placeholder="Your name" required="required" data-error="Name is required.">
-								<div class="help-block with-errors"></div>
-							</div>
-						</div>
-
-						<div class="column col-md-6">
-							<!-- Email input -->
-							<div class="form-group">
-								<input type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Email address" required="required" data-error="Email is required.">
-								<div class="help-block with-errors"></div>
-							</div>
-						</div>
-
-						<div class="column col-md-12">
-							<!-- Email input -->
-							<div class="form-group">
-								<input type="text" class="form-control" id="InputSubject" name="InputSubject" placeholder="Subject" required="required" data-error="Subject is required.">
-								<div class="help-block with-errors"></div>
-							</div>
-						</div>
-
-						<div class="column col-md-12">
-							<!-- Message textarea -->
-							<div class="form-group">
-								<textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" placeholder="Message" required="required" data-error="Message is required."></textarea>
-								<div class="help-block with-errors"></div>
-							</div>
-						</div>
-					</div>
-
-					<button type="submit" name="submit" id="submit" value="Submit" class="btn btn-default">Send Message</button><!-- Send Button -->
-
-				</form>
-				<!-- Contact Form end -->
-			</div>
-
-		</div>
-
-	</div>
-
-</section>
-
-<div class="spacer" data-height="96"></div>
-
-<footer class="footer">
-	<div class="container">
-		<span class="copyright">© All Rights Reserved.</span>
-	</div>
-</footer>
-
-</main>
+		</footer>
+	</main>
 {% endblock %}

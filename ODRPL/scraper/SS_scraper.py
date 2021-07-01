@@ -1,3 +1,4 @@
+from typing import no_type_check_decorator
 from . import constants
 import sys, os, time, json, re
 from .download import download_file
@@ -33,12 +34,14 @@ def scrape_papers_info(query_str):
 	
 	chrome_options = webdriver.ChromeOptions()
 
+	#chrome_options.add_argument('--headless')
 	chrome_options.add_argument('--headless')
-	chrome_options.add_argument('--headless')
-	chrome_options.add_argument("--disable-dev-shm-usage")
-	chrome_options.add_argument("--no-sandbox")
 
-	driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+	if 'HEROKU_ENV' in os.environ:
+		chrome_options.add_argument("--disable-dev-shm-usage")
+		chrome_options.add_argument("--no-sandbox")
+
+	driver = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH'), chrome_options=chrome_options)
 	driver.maximize_window()
 
 	driver.get('https://www.semanticscholar.org/')
@@ -48,14 +51,18 @@ def scrape_papers_info(query_str):
 
 	while True:
 		try:
-			pagination_div = driver.find_element(By.CLASS_NAME, 'cl-pager')
+			main_div = driver.find_element(By.CLASS_NAME, 'result-page')
 			break
 		except Exception as e:
 			print("DOM loading...\n")
 
+	# there are no pages
+	try:
+		pagination_div = driver.find_element(By.CLASS_NAME, 'cl-pager')
+	except Exception as e:
+		return False
+
 	pages = pagination_div.find_elements_by_css_selector('div.cl-pager__button.cl-pager__number')
-	#print(len(results), "\n")
-	#print(len(pages))
 
 	flag = []; # array for keeping track of results that have open-access PDFs
 	urls = []; pdf_urls = []; titles = []; abstracts = []
@@ -68,9 +75,6 @@ def scrape_papers_info(query_str):
 				break
 			except Exception as e:
 				pass
-
-		#time.sleep(5)
-		splits = main_div.find_elements_by_css_selector('.cl-paper-row.serp-papers__paper-row.paper-row-normal')
 		
 		temp = []
 		url_hrefs = []; pdf_url_hrefs = []; title_spans = []

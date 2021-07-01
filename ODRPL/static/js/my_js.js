@@ -1,14 +1,31 @@
 $(document).ready(() => {
 
 	console.log("DOM ready!");
+	const loader = $('#preloader');
 
-	/*$('#select-all').click(() => {
-		$("#select-all").toggle();
-	});*/
+	$( () => {
+		$('#main-form').submit( (event) => {
+			//event.preventDefault();
+			loader.show();
+			$.ajax({
+			url: "{% url 'abstracts' %}",
+			//data: $(this).serialize(),
+			method: 'post',
+			//dataType: 'JSON'
+			}).done(function(resp) {
+			loader.hide();
+			//alert(resp.status);
+			});
+		});
+	});
 
-	//onClick="toggle(this)
-
-
+	$("#search-for-full-papers").submit( (event) => {
+		if ($("input[name=check]:checked").length === 0) {
+			event.preventDefault();
+			alert('Please select atleast one checkbox!');
+			return false;
+		}
+	});
 
 	$('#select-all').click(function(event) {   
 		if (this.checked) {
@@ -26,24 +43,6 @@ $(document).ready(() => {
 		$("#select-all").prop("checked", false);
 	});
 
-	/*function readmore(value) {
-
-		var dots = document.getElementById("dots"+value);
-		var moreText = document.getElementById("more"+value);
-		var btnText = document.getElementById("myBtn"+value);
-
-		if (dots.style.display === "none") {
-			dots.style.display = "inline";
-			btnText.innerHTML = "Read more"; 
-			moreText.style.display = "none";
-		} else {
-			dots.style.display = "none";
-			btnText.innerHTML = "Read less"; 
-			moreText.style.display = "inline";
-		}
-
-	}*/
-
 	$('#selection').click(function() {
 		$(this).text(function(i, text){
 			if (text === "Search For Full Papers") {
@@ -55,7 +54,6 @@ $(document).ready(() => {
 			}
 			return text === "Exit Selection Mode" ? "Search For Full Papers" : "Exit Selection Mode";
 		})
-
 	});
 
 });

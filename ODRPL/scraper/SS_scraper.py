@@ -146,16 +146,10 @@ def scrape_papers_info(query_str):
 		print("\nPage {}:".format(x + 1), flag[x], "\n")
 		print("-------------------------------------\n")
 
-		#while True:
-		#try:
-		#	driver.execute_script("arguments[0].click();", pages[x + 1])
-		#	break
-		#except Exception as e:
-		#	pass
-
+		# does not click the next page if it's the last one
 		if x == no_of_pages - 1:
 			continue
-		
+
 		WebDriverWait(driver, constants.TIMEOUT).until(EC.visibility_of(pages[x + 1]))
 
 		while True:

@@ -52,7 +52,7 @@ def scrape_papers_info(query_str):
 		except Exception as e:
 			print("DOM loading...\n")
 
-	time.sleep(2)
+	time.sleep(5)
 
 	# try if there are any pages
 	try:
@@ -160,7 +160,7 @@ def scrape_papers_info(query_str):
 				pass
 		
 		# halt a little bit to let the next page load properly
-		time.sleep(3)
+		time.sleep(5)
 
 	# save the final result
 	list_ = []

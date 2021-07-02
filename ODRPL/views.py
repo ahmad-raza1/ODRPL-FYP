@@ -47,13 +47,7 @@ def abstracts(request):
 			request.session["query_text"] = query_text
 			abstracts = [paper["abstract"] for paper in papers]
 			
-			while True:
-				try:
-					result = zsc.compute_relevance_scores(query_text, abstracts)
-					break
-				except:
-					pass
-			
+			result = zsc.compute_relevance_scores(query_text, abstracts)
 			print("\n\n----------------------------------\n\n")
 
 			scores = np.around(result["scores"], decimals=2)

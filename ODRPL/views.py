@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.views import View
+from numpy.core.arrayprint import _leading_trailing
 
 from .scraper import SS_scraper as scrp
 from .text_similarity import zero_shot_classifier as zsc
@@ -19,10 +20,11 @@ def abstracts(request):
 
 	if request.method == "POST":
 		query_text = str(request.POST["InputSubject"])
-
-		# clearing extra/duplicate whitespaces
-		"""query_text = " ".join(query_text.split())
+		query_text = " ".join(query_text.split())
 		
+		# clearing extra/duplicate whitespaces
+		query_text = " ".join(query_text.split())
+		"""
 		file = open("sample.json", "r")
 		content = file.read()
 		papers = ast.literal_eval(content)
@@ -37,9 +39,8 @@ def abstracts(request):
 			"papers": papers
 		}
 
-		return render(request, "abstracts.html", context)"""
-
-		query_text = " ".join(query_text.split())
+		return render(request, "abstracts.html", context)
+		"""
 		papers = scrp.scrape_papers_info(query_text)
 
 		if papers:	
@@ -61,14 +62,11 @@ def abstracts(request):
 			for x in range(len(papers)):
 				papers[x]["score"] = int(scores[x] * 100)
 				
-
 			#with open("sample.json", "w") as outfile: 
 			#	json.dump(papers, outfile)
 
 			print(json.dumps(papers, sort_keys=False, indent=4))
 			request.session["papers"] = papers
-
-			#print(json.dumps(scores, sort_keys=False, indent=4))
 
 			context = {
 				"query_text": query_text,
@@ -78,12 +76,13 @@ def abstracts(request):
 			return render(request, "abstracts.html", context)
 
 		else:
-			return HttpResponse("<h4>No results found!</h4>")
+			return HttpResponse("<h1>No results found!</h1>")
 
 	return redirect("index")
 
 
 def	full_papers(request):
+
 	if request.method == "POST":
 		try:
 			query_text = request.session["query_text"]
@@ -95,19 +94,17 @@ def	full_papers(request):
 
 		if check_boxes:
 			chkd_checkboxes_indices = []
+			length = len(check_boxes)
 
-			for x in range(len(check_boxes)):
+			for x in range(length):
 				chkd_checkboxes_indices.append(int(check_boxes[x]))
-
-			print(chkd_checkboxes_indices)
-			print(type(papers))
 
 			selected_papers = []
 
 			for x in chkd_checkboxes_indices:
 				selected_papers.append(papers[x-1])
 
-			print("\n\n----------------------------------\n\n")
+			print("\n\n--------------------------------------------\n\n")
 			print(json.dumps(selected_papers, sort_keys=False, indent=4))
 			
 			context = {
@@ -117,4 +114,4 @@ def	full_papers(request):
 
 			return render(request, "full_papers.html", context)
 
-		return redirect("abstracts")
+	return redirect("abstracts")

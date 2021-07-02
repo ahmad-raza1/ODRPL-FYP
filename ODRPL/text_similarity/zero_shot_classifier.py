@@ -1,7 +1,10 @@
 from transformers import pipeline
 
+global classifier
+classifier = pipeline("zero-shot-classification")
+
 def compute_relevance_scores(sequence, candidate_labels):
-    classifier = pipeline("zero-shot-classification")
+    print("\n\nComputing relevance...\n\n")
     result = classifier(sequence, candidate_labels, multi_class=True)
     return result
 

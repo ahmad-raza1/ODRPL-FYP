@@ -6,10 +6,6 @@
 
 {% block head %}
 <style>
-.mytitle {
-	color = #2b537f !important;
-}
-
 .mytitle:hover {
 	color: #073d78;
 }
@@ -19,255 +15,201 @@
 {% block mode %}class="light"{% endblock %}
 
 {% block body %}
-<!-- desktop header -->
-<header class="desktop-header-3 fixed-top">
-
-	<div class="container">
-
-		<nav class="navbar navbar-expand-lg navbar-dark">
-			<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Bolby" height="108" width="108" /></a> <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNavDropdown" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
-			
-			<div class="nav-search">
+	<!-- desktop header -->
+	<header class="desktop-header-3 fixed-top">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-dark">
+				<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Bolby" height="108" width="108" /></a> <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNavDropdown" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
 				
-				<form method="post" action="{% url 'abstracts' %}" class="search-form">
-				{% csrf_token %}
-					
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search", value="{{ query_text }}" required>
-						<div class="input-group-append">
-							<a href="#advanced-search" class="btn btn-outline-danger work-content" type="button">Advanced</a>
-							<button type="submit" class="btn btn-danger" type="button">Search</button>
-						</div>
-					</div>
-
-				</form>
-
-			</div>
-
-			<div id="advanced-search" class="white-popup zoom-anim-dialog mfp-hide">
-
-				<h5>Search Criteria</h5>
-
-				<hr>
-
-				<form method="post" action="{% url 'abstracts' %}" class="search-form">
-				{% csrf_token %}
-
-					<div class="form-group">
-						<label>Number of Pages:</label>
-						<input type="number" class="form-control" placeholder="Number of Pages" required="required">
-					</div>
-
-					<div class="form-group">
-						<label>Estimated Time: (mm)</label>
-						<input type="number" class="form-control" placeholder="Estimated Time" required="required">
-					</div>
-
-					<div class="form-group">
-						<label>Processing Mode</label>
-						<select class="form-control">
-							<option value="Now" selected>Now</option>
-							<option value="Batch">Batch</option>
-						</select>
-					</div>
-
-					<button type="submit" href="{% url 'abstracts' %}" class="btn btn-default">Search</button>
-
-				</form>
-
-			</div>
-
-			<div class="collapse navbar-collapse" id="navbarNavDropdown">
-				<ul class="navbar-nav ml-auto scrollspy">
-					<li class="nav-item">
-						<a class="nav-link" href="{% url 'index' %}">
-							<i class="fas fa-arrow-left"></i> Go Back
-						</a>
-					</li>				
-				</ul>
-			</div>
-		</nav>
-
-	</div>
-
-</header>
-
-<!-- main layout -->
-<main class="content-3" style="margin-top: 50px;">
-
-	<!-- section experience -->
-	<section id="experience">
-
-		<div class="container">
-
-			<!-- section title -->
-			<h2 class="section-title wow fadeInUp">Search Results</h2>
-
-			<a href="#" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-top: 20px; margin-left: 15px;" id="selection">Search For Full Papers</a>
-
-<form method="post" action="{% url 'full_papers' %}">
-{% csrf_token %}
-
-			<div class="collapse" id="collapseExample" style="margin-top: 10px; margin-left: 15px;">
-				<div class="card">
-					<div class="card-body">
-						<div class="form-check">
-
-							<div class="chickyboxes">
-								<!--<input type="checkbox" id="select-all" onClick="toggle(this)">-->
-								<input type="checkbox" id="select-all">
-								<label for="select-all">Select All</label>
+				<div class="nav-search">
+					<form method="post" action="{% url 'abstracts' %}" class="search-form">
+					{% csrf_token %}
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search", name="InputSubject" value="{{ query_text }}" required>
+							<div class="input-group-append">
+								<a href="#advanced-search" class="btn btn-outline-danger work-content" type="button">Advanced</a>
+								<button type="submit" class="btn btn-danger" type="button">Search</button>
 							</div>
-
 						</div>
-						<!--<a href="loader.html">-->
-							<button type="submit" class="btn btn-default" style="margin-top: 15px;">
-								Search For Full Papers
-							</button>
-						<!--</a>-->
-					</div>
+					</form>
 				</div>
-			</div>
 
-			<div class="spacer" data-height="60"></div>
+				<div id="advanced-search" class="white-popup zoom-anim-dialog mfp-hide">
+					<h5>Search Criteria</h5><hr/>
 
-			<div class="row">
+					<form method="post" action="{% url 'index' %}" class="search-form">
+					{% csrf_token %}
+						<div class="form-group">
+							<label>Number of Pages:</label>
+							<input type="number" class="form-control" placeholder="Number of Pages" required="required">
+						</div>
 
-				<div class="col-md-12">
+						<div class="form-group">
+							<label>Estimated Time: (mm)</label>
+							<input type="number" class="form-control" placeholder="Estimated Time" required="required">
+						</div>
 
-					<!-- timeline wrapper -->
-					<div class="timeline edu bg-white rounded shadow-dark padding-30 overflow-hidden">
+						<div class="form-group">
+							<label>Processing Mode</label>
+							<select class="form-control">
+								<option value="Now" selected>Now</option>
+								<option value="Batch">Batch</option>
+							</select>
+						</div>
 
-						{% for paper in papers %}
+						<button type="submit" class="btn btn-default">Search</button>
+					</form>
+				</div>
 
-						<!-- timeline item -->
-						<div class="timeline-container wow fadeInUp">
-							<div class="content">
-								{% with enable_star="text-warning" %}
-								<span class="time">
-									<span class="fa fa-star {% if paper.score > 0  %}{{ enable_star }}{% endif %}"></span>
-									<span class="fa fa-star {% if paper.score > 20 %}{{ enable_star }}{% endif %}"></span>
-									<span class="fa fa-star {% if paper.score > 40 %}{{ enable_star }}{% endif %}"></span>
-									<span class="fa fa-star {% if paper.score > 60 %}{{ enable_star }}{% endif %}"></span>
-									<span class="fa fa-star {% if paper.score > 80 %}{{ enable_star }}{% endif %}"></span>
-								</span>
-								{% endwith %}
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav ml-auto scrollspy">
+						<li class="nav-item">
+							<a class="nav-link" href="{{request.META.HTTP_REFERER|escape}}">
+								<i class="fas fa-arrow-left"></i> Go Back
+							</a>
+						</li>				
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
 
-								<h3 class="title mytitle">
+	<!-- main layout -->
+	<main class="content-3" style="margin-top: 50px;">
+		<!-- section experience -->
+		<section id="experience">
+			<div class="container">
+				<!-- section title -->
+				<h2 class="section-title wow fadeInUp">Search Results</h2>
+				<a href="#" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-top: 20px; margin-left: 15px;" id="selection">Search For Full Papers</a>
 
-									<a href="{{ paper.url }}" target="_blank" class="without-selection mytitle">{{ paper.title }}</a>
+				<form id="search-for-full-papers" method="post" action="{% url 'full_papers' %}">
+				{% csrf_token %}
+					<!-- capturing the request path for redirecting to this page -->
+					<input type="hidden" name="next" value="{{request.path}}">
 
-									<!--<p class="without-selection">{{ paper.title }}</p>-->
-									<div class="juiceboxes with-selection">
-										<input type="checkbox" id="box-{{ forloop.counter }}" name="check" value="{{ forloop.counter }}">
-										<label for="box-{{ forloop.counter }}">{{ paper.title }}</label>
-									</div>
-
-								</h3>
-
-								<div class="c100 p{{ paper.score }} small">
-									<span style="color: #6c757d;">{{ paper.score }}%</span>
-									<div class="slice">
-										<div class="bar"></div>
-										<div class="fill"></div>
+					<div class="collapse" id="collapseExample" style="margin-top: 10px; margin-left: 15px;">
+						<div class="card">
+							<div class="card-body">
+								
+								<div class="form-check">
+									<div class="chickyboxes">
+										<input type="checkbox" id="select-all">
+										<label for="select-all">Select All</label>
 									</div>
 								</div>
 
-								<div style="margin-left: 100px;">
+								<button type="submit" class="btn btn-default" style="margin-top: 15px;">
+									Search For Full Papers
+								</button>
+							</div>
+						</div>
+					</div>
 
-									<p style="text-align: justify; text-justify: inter-word; padding-right: 50px;">
-										{% with paper.abstract|split:"." as sentences %}
-										<span id="myAbstract{{ forloop.counter }}">{{ sentences.0 }}</span>
-										{% endwith %}
-										<!--Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto. Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto. Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto. Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.-->
-										<span id="dots{{ forloop.counter }}">...</span>
-										<span id="more{{ forloop.counter }}" style="display: none;">
-											{{ paper.abstract }}
-											<!--Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto. Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto. Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto. Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.-->
+					<div class="spacer" data-height="60"></div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<!-- timeline wrapper -->
+							<div class="timeline edu bg-white rounded shadow-dark padding-30 overflow-hidden">
+								{% for paper in papers %}
+								<!-- timeline item -->
+								<div class="timeline-container wow fadeInUp">
+									<div class="content">
+										{% with enable_star="text-warning" %}
+										<span class="time">
+											<span class="fa fa-star {% if paper.score > 0  %}{{ enable_star }}{% endif %}"></span>
+											<span class="fa fa-star {% if paper.score > 20 %}{{ enable_star }}{% endif %}"></span>
+											<span class="fa fa-star {% if paper.score > 40 %}{{ enable_star }}{% endif %}"></span>
+											<span class="fa fa-star {% if paper.score > 60 %}{{ enable_star }}{% endif %}"></span>
+											<span class="fa fa-star {% if paper.score > 80 %}{{ enable_star }}{% endif %}"></span>
 										</span>
-									</p>
-									<button type="button" class="btn btn-secondary" onclick="readmore({{ forloop.counter }})" id="myBtn{{ forloop.counter }}" style="margin-top: 15px;">Read more</button>
+										{% endwith %}
 
+										<h3 class="title mytitle">
+											<a href="{{ paper.url }}" target="_blank" class="without-selection mytitle">{{ paper.title }}</a>
+											<div class="juiceboxes with-selection">
+												<input type="checkbox" id="box-{{ forloop.counter }}" name="check" value="{{ forloop.counter }}">
+												<label for="box-{{ forloop.counter }}">{{ paper.title }}</label>
+											</div>
+										</h3>
+
+										<div class="c100 p{{ paper.score }} small">
+											<span style="color: #6c757d;">{{ paper.score }}%</span>
+											<div class="slice">
+												<div class="bar"></div>
+												<div class="fill"></div>
+											</div>
+										</div>
+
+										<div style="margin-left: 100px;">
+											<p style="text-align: justify; text-justify: inter-word; padding-right: 50px;">
+												{% with paper.abstract|split:"." as sentences %}
+												<span id="myAbstract{{ forloop.counter }}">{{ sentences.0 }}</span>
+												{% endwith %}
+												<span id="dots{{ forloop.counter }}">...</span>
+												<span id="more{{ forloop.counter }}" style="display: none;">
+													{{ paper.abstract }}
+												</span>
+											</p>
+											<button type="button" class="btn btn-secondary" onclick="readmore({{ forloop.counter }})" id="myBtn{{ forloop.counter }}" style="margin-top: 15px;">Read more</button>
+										</div>
+									</div>
 								</div>
-
-								<!--<div class="spacer" data-height="50"></div>-->
-
+								{% endfor %}
+								
+								<!-- main line -->
+								<span class="line"></span>
 							</div>
-
 						</div>
-						{% endfor %}
-
-						
-						<!-- main line -->
-						<span class="line"></span>
-
 					</div>
+				</form>
 
-				</div>
-
+				<div class="center">
+					<div class="pagination">
+						<a href="#">&laquo;</a>
+						<a href="#" class="active">1</a>
+						<a href="#">2</a>
+						<a href="#">3</a>
+						<a href="#">4</a>
+						<a href="#">5</a>
+						<a href="#">6</a>
+						<a href="#">&raquo;</a>
+					</div>
+				</div>				
 			</div>
+		</section>
 
-</form>
+		<div class="spacer" data-height="60"></div>
 
+		<footer class="footer">
+			<div class="container">
+				<span class="copyright">© All Rights Reserved.</span>
+			</div>
+		</footer>
 
-			<div class="center">
-
-				<div class="pagination">
-
-					<a href="#">&laquo;</a>
-					<a href="#" class="active">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">4</a>
-					<a href="#">5</a>
-					<a href="#">6</a>
-					<a href="#">&raquo;</a>
-
-				</div>
-
-			</div>				
-
-		</div>
-
-	</section>
-
-	<div class="spacer" data-height="96"></div>
-
-	<footer class="footer">
-		<div class="container">
-			<span class="copyright">© All Rights Reserved.</span>
-		</div>
-	</footer>
-
-</main>
+	</main>
 {% endblock %}
 
 {% block extrascripts %}
-<script src="{% static 'js/my_js.js' %}"></script>
 <script type="text/javascript">
 	function readmore(value) {
-
 		var shortAbstract = document.getElementById("myAbstract"+value);
 		var dots = document.getElementById("dots"+value);
 		var moreText = document.getElementById("more"+value);
 		var btnText = document.getElementById("myBtn"+value);
 
 		if (dots.style.display === "none") {
-
 			shortAbstract.style.display = "inline";
-
 			dots.style.display = "inline";
 			btnText.innerHTML = "Read more"; 
 			moreText.style.display = "none";
 		} else {
-
 			shortAbstract.style.display = "none";
-
 			dots.style.display = "none";
 			btnText.innerHTML = "Read less"; 
 			moreText.style.display = "inline";
 		}
-
 	}
 </script>
 {% endblock %}

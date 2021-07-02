@@ -5,5 +5,5 @@ python-decouple==3.4
 numpy==1.19.2
 selenium==3.141.0
 Django==3.1.7
-tensorflow-cpu==2.5.0
+pytorch
 transformers==3.1.0

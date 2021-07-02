@@ -37,7 +37,7 @@
 				<div id="advanced-search" class="white-popup zoom-anim-dialog mfp-hide">
 					<h5>Search Criteria</h5><hr/>
 
-					<form method="post" action="{% url 'index' %}" class="search-form">
+					<form method="post" action="#" onsubmit="event.preventDefault()" class="search-form">
 					{% csrf_token %}
 						<div class="form-group">
 							<label>Number of Pages:</label>

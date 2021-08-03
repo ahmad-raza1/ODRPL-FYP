@@ -1,6 +1,6 @@
 # ODRPL-FYP
 
-##### User Manual #####
+## User Manual
 
 User Manual is provided for the ease of the User. ODRPL designs for technical Users who are familiar with the GitHub. Firstly, we need to install the required packages and dependencies for the system. The detailed instructions are given below:
 
